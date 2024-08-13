@@ -60,45 +60,45 @@ function toggleControlButtons() {
   });
 }
 
-function changeSpinDirectionHandler(event) {
-  const spinDirection = event.target.value;
-  const earbudsPlugin = Object.entries(EARBUDS_PLUGIN);
-  const nikePlugin = Object.entries(NIKE_PLUGIN);
-  const isSpinYDirection = spinDirection === "Y";
+// function changeSpinDirectionHandler(event) {
+//   const spinDirection = event.target.value;
+//   const earbudsPlugin = Object.entries(EARBUDS_PLUGIN);
+//   const nikePlugin = Object.entries(NIKE_PLUGIN);
+//   const isSpinYDirection = spinDirection === "Y";
 
-  nikePlugin.forEach(([key, value]) => {
-    updatePluginValues(key, { value }, null, !isSpinYDirection);
-    isSpinYDirection ?
-      container.setAttribute(key, value) :
-      container.removeAttribute(key);
-  });
+//   nikePlugin.forEach(([key, value]) => {
+//     // updatePluginValues();(key, { value }, null, !isSpinYDirection);
+//     isSpinYDirection ?
+//       container.setAttribute(key, value) :
+//       container.removeAttribute(key);
+//   });
 
-  if (isSpinYDirection) {
-    isSpinY = true;
+//   if (isSpinYDirection) {
+//     isSpinY = true;
 
-    imageXSelector.style.display = "none";
-    nikeXSelector.style.display = "block";
-    imagesY.style.display = "flex";
-  } else {
-    isSpinY = false;
+//     imageXSelector.style.display = "none";
+//     nikeXSelector.style.display = "block";
+//     imagesY.style.display = "flex";
+//   } else {
+//     isSpinY = false;
 
-    earbudsPlugin.forEach(([key, value]) => {
-      container.setAttribute(key, value);
-      updatePluginValues(key, { value });
-    });
+//     earbudsPlugin.forEach(([key, value]) => {
+//       container.setAttribute(key, value);
+//       // updatePluginValues();(key, { value });
+//     });
 
-    imageXSelector.style.display = "block";
-    nikeXSelector.style.display = "none";
-    imagesY.style.display = "none";
-  }
+//     imageXSelector.style.display = "block";
+//     nikeXSelector.style.display = "none";
+//     imagesY.style.display = "none";
+//   }
 
-  autoPlayBehavior.disabled = !autoPlayBehavior.disabled
+//   autoPlayBehavior.disabled = !autoPlayBehavior.disabled
 
-  CLOUDIMAGE_360.update("demo-generator");
-  updateContainer();
-  updateControlButtons();
-  toggleControlButtons();
-}
+//   CLOUDIMAGE_360.update("demo-generator");
+//   updateContainer();
+//   updateControlButtons();
+//   toggleControlButtons();
+// }
 
 function changePointerZoomHandler(event) {
   const ispluginCheckboxChecked = event.target.checked;
@@ -118,11 +118,11 @@ function changePointerZoomHandler(event) {
   CLOUDIMAGE_360.update("demo-generator");
   updateContainer();
 
-  updatePluginValues(
-    pluginAttribute,
-    { value: value },
-    event.target.type,
-  );
+  // updatePluginValues(
+  //   pluginAttribute,
+  //   { value: value },
+  //   event.target.type,
+  // );
 }
 
 function changeResponsiveOptionHandler(event) {
@@ -134,14 +134,14 @@ function changeResponsiveOptionHandler(event) {
     if (ispluginCheckboxChecked) {
       container.setAttribute(pluginAttribute, input.value);
 
-      updatePluginValues(
-        pluginAttribute,
-        { value: input.value },
-        event.target.type,
-      );
+      // updatePluginValues(
+      //   pluginAttribute,
+      //   { value: input.value },
+      //   event.target.type,
+      // );
     } else {
       container.removeAttribute(pluginAttribute);
-      updatePluginValues(pluginAttribute, { value: "" }, event.target.type);
+      // updatePluginValues();(pluginAttribute, { value: "" }, event.target.type);
     }
 
     input.disabled=!input.disabled
@@ -159,14 +159,14 @@ function changeBoxShadowOptionHandler(event) {
     if (ispluginCheckboxChecked) {
       container.setAttribute(pluginAttribute, shadowBoxInput.value);
 
-      updatePluginValues(
-        pluginAttribute,
-        { value: shadowBoxInput.value },
-        event.target.type,
-      );
+      // updatePluginValues(
+      //   pluginAttribute,
+      //   { value: shadowBoxInput.value },
+      //   event.target.type,
+      // );
     } else {
       container.removeAttribute(pluginAttribute);
-      updatePluginValues(pluginAttribute, { value: "" }, event.target.type);
+      // updatePluginValues();(pluginAttribute, { value: "" }, event.target.type);
     }
 
     shadowBoxInput.disabled=!shadowBoxInput.disabled
@@ -208,7 +208,7 @@ function pluginCheckboxOptionsHandler(event) {
 
   CLOUDIMAGE_360.update("demo-generator");
   updateContainer();
-  updatePluginValues(pluginAttribute, { value: value }, event.target.type);
+  // updatePluginValues();(pluginAttribute, { value: value }, event.target.type);
 }
 
 function changePluginInputsHandler(event) {
@@ -223,25 +223,25 @@ function changePluginInputsHandler(event) {
 
   CLOUDIMAGE_360.update("demo-generator");
   updateContainer();
-  updatePluginValues(pluginAttribute, { value }, event.target.type);
+  // updatePluginValues();(pluginAttribute, { value }, event.target.type);
 }
 
-function updatePluginValues(key, properties = {}, inputType, removeProp) {
-  const isCheckbox = inputType === "checkbox";
-  const isEmptyInput = !isCheckbox && !properties.value;
+// function updatePluginValues(key, properties = {}, inputType, removeProp) {
+//   const isCheckbox = inputType === "checkbox";
+//   const isEmptyInput = !isCheckbox && !properties.value;
 
-  if (
-    Object.keys(PLUGIN_PROPS).includes(key)
-    && (isCheckbox || isEmptyInput || removeProp)
-  ) {
-    delete PLUGIN_PROPS[key];
-  } else if (key) {
-    PLUGIN_PROPS[key] = {};
-    PLUGIN_PROPS[key].value = properties.value;
-  }
+//   if (
+//     Object.keys(PLUGIN_PROPS).includes(key)
+//     && (isCheckbox || isEmptyInput || removeProp)
+//   ) {
+//     delete PLUGIN_PROPS[key];
+//   } else if (key) {
+//     PLUGIN_PROPS[key] = {};
+//     PLUGIN_PROPS[key].value = properties.value;
+//   }
 
-  updateCodeBlock();
-}
+//   updateCodeBlock();
+// }
 
 function updateCodeBlock() {
   codeBlock.innerText = "";
@@ -273,21 +273,21 @@ function updateCodeBlock() {
   });
 }
 
-updatePluginValues();
-window.CI360.addHotspots("gurkha-suv", GURKHA_SUV_HOTSPOTS_CONFIG);
+// updatePluginValues();();
+// window.CI360.addHotspots("gurkha-suv", GURKHA_SUV_HOTSPOTS_CONFIG);
 
-spinDirections.addEventListener("change", changeSpinDirectionHandler);
-copyButton.addEventListener("click", copyCodeHandler);
-controlOption.addEventListener("change", toggleControlButtons);
-responsive.addEventListener("change", changeResponsiveOptionHandler);
-boxShadow.addEventListener("change", changeBoxShadowOptionHandler);
-pointerZoomCheckbox.addEventListener("change", changePointerZoomHandler);
-accordions.forEach((accordion) => {
-  accordion.addEventListener("click", showAccordionContent)
-});
-pluginCheckboxOptions.forEach((option) => {
-  option.addEventListener("change", pluginCheckboxOptionsHandler)
-});
-pluginInputs.forEach((input) => {
-  input.addEventListener("change", changePluginInputsHandler)
-});
+// spinDirections.addEventListener("change", changeSpinDirectionHandler);
+// copyButton.addEventListener("click", copyCodeHandler);
+// controlOption.addEventListener("change", toggleControlButtons);
+// responsive.addEventListener("change", changeResponsiveOptionHandler);
+// boxShadow.addEventListener("change", changeBoxShadowOptionHandler);
+// pointerZoomCheckbox.addEventListener("change", changePointerZoomHandler);
+// accordions.forEach((accordion) => {
+//   accordion.addEventListener("click", showAccordionContent)
+// });
+// pluginCheckboxOptions.forEach((option) => {
+//   option.addEventListener("change", pluginCheckboxOptionsHandler)
+// });
+// pluginInputs.forEach((input) => {
+//   input.addEventListener("change", changePluginInputsHandler)
+// });

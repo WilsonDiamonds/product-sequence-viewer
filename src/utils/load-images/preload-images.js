@@ -4,6 +4,15 @@ import { prepareImagesFromFolder } from './images-from-folder/prepare-images-fro
 import { prepareImagesFromList } from './images-from-list/prepare-images-from-list';
 
 export const preloadImages = (srcConfig, imagesSrc, cb) => {
+  if (Array.isArray(imagesSrc)) {
+    imagesSrc.forEach((src, index) => {
+      const image = new Image();
+      image.src = src;
+      image.onload = () => cb(image, index);
+    });
+  } else {
+    // Existing logic for non-base64 images
+  
   const { imageList } = srcConfig || {};
   let imagesSrcs = [];
 
@@ -20,4 +29,6 @@ export const preloadImages = (srcConfig, imagesSrc, cb) => {
   }
 
   loadImagesRelativeToContainerSize(imagesSrcs, cb);
+}
 };
+

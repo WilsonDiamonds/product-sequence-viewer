@@ -1289,6 +1289,7 @@ class CI360Viewer {
     this.imageListY = imageListY;
     this.indexZeroBase = indexZeroBase;
     this.amountX = imageListX ? JSON.parse(imageListX).length : amountX;
+    this.amountX = Array.isArray(folder) ? folder.length : amountX;
     this.amountY = imageListY ? JSON.parse(imageListY).length : amountY;
     this.allowSpinY = (!!this.amountY);
     this.activeImageX = autoplayReverse ? this.amountX : 1;
